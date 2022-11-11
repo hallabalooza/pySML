@@ -180,11 +180,11 @@ class _SML_Base:
       0x7bc7, 0x6a4e, 0x58d5, 0x495c, 0x3de3, 0x2c6a, 0x1ef1, 0x0f78
     ]
     cCrc = 0xFFFF
-    for i in range(len(Data)):
-      cCrc = (cCrc >> 8) ^ vTab[(cCrc ^ Data[i]) & 0xFF]
+    for b in Data:
+      cCrc = (cCrc >> 8) ^ vTab[(cCrc ^ b) & 0xFF]
     cCrc ^= 0xFFFF
     if   ( True == Int ): return ((cCrc&0xFF)<<8) + ((cCrc&0xFF00)>>8)
-    else                : return bytearray([cCrc&0xFF, (cCrc%0xFF00)>>8])
+    else                : return bytearray([cCrc&0xFF, (cCrc&0xFF00)>>8])
 
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   def getText(self, Indent=0, Info=""):
